@@ -1,6 +1,14 @@
 class Contact < ApplicationRecord
   belongs_to :kind
 
+  def to_br
+    {
+      name: self.name,
+      email: self.email,
+      birthdate: (I18n.l(self.birthdate) unless self.birthdate.nil?)
+    }
+  end
+
   # def author
   #   'Hebe Camargo'
   # end
