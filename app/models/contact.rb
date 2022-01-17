@@ -1,12 +1,13 @@
 class Contact < ApplicationRecord
   belongs_to :kind
+  has_many :phones
 
-  def to_br
-    {
-      name: self.name,
-      email: self.email,
-      birthdate: (I18n.l(self.birthdate) unless self.birthdate.nil?)
-    }
+  accepts_nested_attributes_for :phones, allow_destroy: true
+
+  def as_json(options={})
+    h = super(options)
+    h[:birthdate] = (I18n.l(self.birthdate) unless self.birthdate.nil?)
+    h
   end
 
   # def author
