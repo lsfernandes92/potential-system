@@ -10,12 +10,12 @@ module V1
       per_page = params[:page].try(:[], :size)
       @contacts = Contact.all.page(page_number).per(per_page)
 
-      render json: @contacts
+      render json: @contacts if stale?(etag: @contacts)
     end
 
     # GET /contacts/1
     def show
-      render json: @contact, include: [:kind, :address, :phones]
+      render json: @contact, include: [:kind, :address, :phones] if stale?(etag: @contact)
     end
 
     # POST /contacts
