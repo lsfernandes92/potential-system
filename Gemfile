@@ -13,6 +13,8 @@ gem 'puma', '~> 5.0'
 gem 'rails-i18n', '~> 7.0.0'
 # ActiveModel::Serializer implementation and Rails hooks
 gem 'active_model_serializers'
+# A plugin for versioning Rails based RESTful APIs.
+gem 'versionist'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
