@@ -24,9 +24,9 @@ module V1
       }
     end
 
-    def as_json(*args)
-      h = super(args)
-      h[:birthdate] = object.birthdate.to_time.to_iso8601 unless object.birthdate.nil?
+    def attributes(*args)
+      h = super(*args)
+      h[:birthdate] = (I18n.l(object.birthdate) unless object.birthdate.blank?)
       h
     end
   end
