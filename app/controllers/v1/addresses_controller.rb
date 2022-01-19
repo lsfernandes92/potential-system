@@ -1,5 +1,7 @@
 module V1
   class AddressesController < ApplicationController
+    include ErrorSerializer
+
     before_action :set_contact
 
     # GET /contacts/:contact_id/address
@@ -14,7 +16,7 @@ module V1
       if @contact.save
         render json: @contact.address, status: :created, location: contact_address_url(@contact)
       else
-        render json: @contact.errors, status: :unprocessable_entity
+        render json: ErrorSerializer.serialize(@contact.errors), status: :unprocessable_entity
       end
     end
 
@@ -23,7 +25,7 @@ module V1
       if @contact.address.update(address_params)
         render json: @contact.address
       else
-        render json: @contact.errors, status: :unprocessable_entity
+        render json: ErrorSerializer.serialize(@contact.errors), status: :unprocessable_entity
       end
     end
 
